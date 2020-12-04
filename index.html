@@ -2,11 +2,17 @@
 <html>
   <head>
     <title>Card Guesser</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./script.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <link
+    <!--     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    /> -->
+    <script
+      src="https://kit.fontawesome.com/6d824d121f.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://fonts.googleapis.com/css?family=Crimson+Text|Unica+One"
       rel="stylesheet"
@@ -15,50 +21,56 @@
   </head>
 
   <body>
+    <div id="overlay"></div>
     <div class="container">
-      <div class="wrapper">
+      <div class="wrapper" onclick="initiateGame()">
         <a class="playButton" href="#">Play</a>
       </div>
 
       <div class="row">
         <div class="card one">
-          <span class="fa fa-question" aria-hidden="true" id="one"></span>
+          <span
+            class="icon"
+            aria-hidden="true"
+            id="one"
+            onclick="displayIcon('one')"
+          ></span>
         </div>
         <div class="card two">
-          <span class="fa fa-question" aria-hidden="true" id="two"></span>
+          <span class="icon" aria-hidden="true" id="two"></span>
         </div>
 
         <div class="card three">
-          <span class="fa fa-question" aria-hidden="true" id="three"></span>
+          <span class="icon" aria-hidden="true" id="three"></span>
         </div>
         <div class="card four">
-          <span class="fa fa-question" aria-hidden="true" id="four"></span>
+          <span class="icon" aria-hidden="true" id="four"></span>
         </div>
 
         <div class="card five">
-          <span class="fa fa-question" aria-hidden="true" id="five"></span>
+          <span class="icon" aria-hidden="true" id="five"></span>
         </div>
         <div class="card six">
-          <span class="fa fa-question" aria-hidden="true" id="six"></span>
+          <span class="icon" aria-hidden="true" id="six"></span>
         </div>
         <div class="card seven">
-          <span class="fa fa-question" aria-hidden="true" id="seven"></span>
+          <span class="icon" aria-hidden="true" id="seven"></span>
         </div>
         <div class="card eight">
-          <span class="fa fa-question" aria-hidden="true" id="eight"></span>
+          <span class="icon" aria-hidden="true" id="eight"></span>
         </div>
 
         <div class="card nine">
-          <span class="fa fa-question" aria-hidden="true" id="nine"></span>
+          <span class="icon" aria-hidden="true" id="nine"></span>
         </div>
         <div class="card ten">
-          <span class="fa fa-question" aria-hidden="true" id="ten"></span>
+          <span class="icon" aria-hidden="true" id="ten"></span>
         </div>
         <div class="card eleven">
-          <span class="fa fa-question" aria-hidden="true" id="eleven"></span>
+          <span class="icon" aria-hidden="true" id="eleven"></span>
         </div>
         <div class="card twelve">
-          <span class="fa fa-question" aria-hidden="true" id="twelve"></span>
+          <span class="icon" aria-hidden="true" id="twelve"></span>
         </div>
       </div>
     </div>

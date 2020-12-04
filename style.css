@@ -19,6 +19,18 @@ body {
   width: 95%;
   margin: 0 auto;
 } */
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1;
+}
+
 .container {
   box-sizing: border-box;
   width: 100%;
@@ -26,7 +38,6 @@ body {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-
 }
 @media only screen and (min-width: 460px) {
   .container {
@@ -49,17 +60,14 @@ body {
   }
 }
 
-
-
-
-
 /* Play Button */
 
 .wrapper {
   display: flex;
   height: 30vh;
+  z-index: 3;
+  position: relative;
 }
-
 
 .playButton {
   font-family: "Unica One", Cursive;
@@ -123,42 +131,25 @@ body {
   border-radius: 10px;
 }
 
-@media only screen and (min-width: 700px){
+@media only screen and (min-width: 700px) {
   .card {
     width: 15vw;
-  height: 15vw;
+    height: 15vw;
   }
 }
-@media only screen and (min-width: 1000px){
+@media only screen and (min-width: 1000px) {
   .card {
     width: 12vw;
-  height: 12vw;
-  margin: 0.7em;
+    height: 12vw;
+    margin: 0.7em;
   }
 }
-@media only screen and (min-width: 1500px){
+@media only screen and (min-width: 1500px) {
   .card {
-  width: 10vw;
-  height: 10vw;
-  margin: 0.9em;
+    width: 10vw;
+    height: 10vw;
+    margin: 0.9em;
   }
-}
-
-
-span.fa {
-  font-size: 50px;
-}
-#one {
-  color: #006fff;
-  text-shadow: 0 0 30px #006fff;
-}
-#two {
-  color: #ff5f40;
-  text-shadow: 0 0 30px #ff5f40;
-}
-#three {
-  color: #00acff;
-  text-shadow: 0 0 30px #00acff;
 }
 .card:hover {
   transform: scale(1.2);
@@ -176,8 +167,62 @@ span.fa {
   box-shadow: 0 30px 45px -15px rgba(255, 16, 39, 0.57);
 }
 .card.three {
-  box-shadow: 0 20px 20px -17px rgba(0, 255, 255, 0.53);
+  box-shadow: 0 20px 20px -17px rgba(5, 255, 151, 0.53);
 }
 .card.three:hover {
+  box-shadow: 0 30px 45px -15px rgba(5, 255, 151, 0.6);
+}
+.card.four {
+  box-shadow: 0 20px 20px -17px rgba(0, 255, 255, 0.53);
+}
+.card.four:hover {
   box-shadow: 0 30px 45px -15px rgba(0, 111, 255, 0.6);
+}
+
+#one::before {
+  color: #006fff;
+  text-shadow: 0 0 30px;
+}
+#two {
+  color: #ff5f40;
+  text-shadow: 0 0 30px #ff5f40;
+}
+#three {
+  color: rgb(0, 255, 136);
+  text-shadow: 0 0 30px rgb(0, 255, 136);
+}
+#four {
+  color: #00acff;
+  text-shadow: 0 0 30px #00acff;
+}
+/* Icons on cards */
+
+span.icon::before {
+  font-size: 50px;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f128";
+}
+
+.icon.one::before {
+  content: "\f06d";
+}
+.icon.two::before {
+  content: "\f1e2";
+}
+
+.icon.three::before {
+  content: "\f083";
+}
+
+.icon.four::before {
+  content: "\f810";
+}
+
+.icon.five::before {
+  content: "\f1e3";
+}
+.icon.six::before {
+  content: "\f57b";
 }
