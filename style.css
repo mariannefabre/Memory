@@ -11,6 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  color: white;
   background-color: #11161f;
 }
 /* 
@@ -69,7 +70,14 @@ body {
   position: relative;
 }
 
-.playButton {
+.buttonHolder {
+  width: 100%;
+  display: flex;
+  height: 30vh;
+  z-index: 3;
+  position: relative;
+}
+.button {
   font-family: "Unica One", Cursive;
   font-size: 1.3rem;
   font-weight: bold;
@@ -91,11 +99,11 @@ body {
   transition: box-shadow 0.6s;
 }
 
-.playButton:hover {
+.button:hover {
   box-shadow: 0 0 60px 2px var(--spotTwo), 0.5rem 0.5rem 30px var(--spotOne);
 }
 
-.playButton:after {
+.button:after {
   content: "";
   position: absolute;
   top: 2px;
@@ -111,6 +119,20 @@ body {
   pointer-events: none;
 }
 
+.scoreHolder {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.turnsCount, .timer {
+  margin: 1rem 3rem;
+}
 /* Cards */
 
 .row {
@@ -154,75 +176,96 @@ body {
 .card:hover {
   transform: scale(1.2);
 }
-.card.one {
+.card.one,
+.card.six {
   box-shadow: 0 20px 20px -17px rgba(0, 111, 255, 0.53);
 }
-.card.one:hover {
+.card.one:hover,
+.card.six:hover {
   box-shadow: 0 30px 45px -15px rgba(0, 111, 255, 0.65);
 }
-.card.two {
+.card.two,
+.card.seven {
   box-shadow: 0 20px 20px -17px rgba(255, 16, 39, 0.5);
 }
-.card.two:hover {
+.card.two:hover,
+.card.seven:hover {
   box-shadow: 0 30px 45px -15px rgba(255, 16, 39, 0.57);
 }
-.card.three {
+.card.three,
+.card.eight {
   box-shadow: 0 20px 20px -17px rgba(5, 255, 151, 0.53);
 }
-.card.three:hover {
+.card.three:hover,
+.card.eight:hover {
   box-shadow: 0 30px 45px -15px rgba(5, 255, 151, 0.6);
 }
-.card.four {
+.card.four,
+.card.five {
   box-shadow: 0 20px 20px -17px rgba(0, 255, 255, 0.53);
 }
-.card.four:hover {
+.card.four:hover,
+.card.five:hover {
   box-shadow: 0 30px 45px -15px rgba(0, 111, 255, 0.6);
 }
 
-#one::before {
+#one::before,
+#six::before,
+#nine::before {
   color: #006fff;
   text-shadow: 0 0 30px;
 }
-#two {
+#two::before,
+#seven::before,
+#ten::before {
   color: #ff5f40;
   text-shadow: 0 0 30px #ff5f40;
 }
-#three {
+#three::before,
+#eight::before,
+#eleven::before {
   color: rgb(0, 255, 136);
   text-shadow: 0 0 30px rgb(0, 255, 136);
 }
-#four {
+#four::before,
+#five::before,
+#twelve::before {
   color: #00acff;
   text-shadow: 0 0 30px #00acff;
 }
 /* Icons on cards */
 
+span.icon {
+  transform: translateZ(0);
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
 span.icon::before {
-  font-size: 50px;
+  font-size: 55px;
   -webkit-font-smoothing: antialiased;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f128";
 }
 
-.icon.one::before {
+.icon.icon1::before {
   content: "\f06d";
 }
-.icon.two::before {
+.icon.icon2::before {
   content: "\f1e2";
 }
 
-.icon.three::before {
+.icon.icon3::before {
   content: "\f083";
 }
 
-.icon.four::before {
+.icon.icon4::before {
   content: "\f810";
 }
 
-.icon.five::before {
+.icon.icon5::before {
   content: "\f1e3";
 }
-.icon.six::before {
+.icon.icon6::before {
   content: "\f57b";
 }

@@ -3,7 +3,7 @@
   <head>
     <title>Card Guesser</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./script.js"></script>
+
     <link rel="stylesheet" type="text/css" href="style.css" />
     <!--     <link
       rel="stylesheet"
@@ -23,18 +23,25 @@
   <body>
     <div id="overlay"></div>
     <div class="container">
-      <div class="wrapper" onclick="initiateGame()">
-        <a class="playButton" href="#">Play</a>
+      <div class="wrapper">
+        <div class="buttonHolder" id="play-button">
+          <a class="button" href="#">Play</a>
+        </div>
+        <div class="scoreHolder" id="score">
+          <div class="timer">
+            <h2>Time spent</h2>
+            <p id="chronotime">0:00:00</p>
+          </div>
+          <div class="turnsCount">
+            <h2>Turns</h2>
+            <p id="count">0</p>
+          </div>
+        </div>
       </div>
 
       <div class="row">
         <div class="card one">
-          <span
-            class="icon"
-            aria-hidden="true"
-            id="one"
-            onclick="displayIcon('one')"
-          ></span>
+          <span class="icon" aria-hidden="true" id="one"></span>
         </div>
         <div class="card two">
           <span class="icon" aria-hidden="true" id="two"></span>
@@ -74,5 +81,6 @@
         </div>
       </div>
     </div>
+    <script src="./script.js"></script>
   </body>
 </html>
