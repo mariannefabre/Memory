@@ -1,7 +1,7 @@
 function main() {
   const cards = [];
   let turnsCount = 0;
-  let flippedCards = [];
+  const flippedCards = [];
 
   let playButton = document.getElementById("play-button");
   playButton.addEventListener("click", initiateGame, true);
@@ -57,7 +57,7 @@ function main() {
     iconElement.addEventListener("click", (showIcon) => {
       const matchingCard = cards.find((card) => card[0] == iconElement.id);
       const icon = matchingCard[1];
-      recordChoice(iconElement.id, icon);
+      displayResult(iconElement.id, icon);
 
       switch (icon) {
         case "\\f06d":
@@ -82,61 +82,79 @@ function main() {
     });
   });
 
-  function recordChoice(cardNumber, icon) {
-    flippedCards.push([cardNumber, icon]);
-    if (flippedCards.length == 2) {
-      if (compareCards() == true) {
-        document.getElementById(cardNumber).parentElement.style.visibility =
-          "hidden";
-        document.getElementById(
-          flippedCards[0][0]
-        ).parentElement.style.visibility = "hidden";
-      } else {
-        sleep(1200).then(() => {
-          // HAVE TO PUT THE CORRECT ICON
-          $(".icon.icon1").removeClass("icon1");
-          $(".icon.icon2").removeClass("icon1");
-          console.log("here3");
+  function displayResult(chosenCard, icon) {
+    changeCursor(chosenCard, "initial");
+    flippedCards.push([chosenCard, icon]);
+
+    if (flippedCards.length === 2) {
+      const previousCard = flippedCards[0][0];
+      if (compareCards() === "match") {
+        sleep(500).then(() => {
+          removeCard(chosenCard);
+          removeCard(previousCard);
+          flippedCards.splice(0, flippedCards.length);
+          turnsCount++;
+          document.getElementById("count").innerHTML = turnsCount;
+          if (numberOfCardsLeft() == 0) {
+            chronoPause();
+          }
         });
+      } else if (compareCards() === "different") {
+        changeCursor(chosenCard, "pointer");
+        changeCursor(previousCard, "pointer");
+        sleep(1000).then(() => {
+          let lastClass = $("#" + chosenCard)
+            .attr("class")
+            .split(" ")
+            .pop();
+          $("#" + chosenCard).removeClass(lastClass);
+          let previousLastClass = $("#" + previousCard)
+            .attr("class")
+            .split(" ")
+            .pop();
+          $("#" + previousCard).removeClass(previousLastClass);
+        });
+        flippedCards.splice(0, flippedCards.length);
+        turnsCount++;
+        document.getElementById("count").innerHTML = turnsCount;
+      } else if (compareCards() === "same card") {
+        flippedCards.pop();
       }
-      flippedCards.splice(0, cards.length);
-      turnsCount++;
-      console.log(turnsCount);
-      document.getElementById("count").innerHTML = turnsCount;
     }
   }
 
+  function changeCursor(elementId, value) {
+    document.getElementById(elementId).parentElement.style.cursor = value;
+  }
+  function removeCard(elementId) {
+    const el = document.getElementById(elementId).parentElement;
+    $(el).addClass("fadeOut");
+  }
   function compareCards() {
-    if (flippedCards[0][1] == flippedCards[1][1]) {
-      console.log(flippedCards[0][1], flippedCards[1][1]);
-      return true;
+    if (
+      flippedCards[0][0] == flippedCards[1][0] &&
+      flippedCards[0][1] == flippedCards[1][1]
+    ) {
+      return "same card";
+    } else if (flippedCards[0][1] == flippedCards[1][1]) {
+      return "match";
     } else {
-      return false;
+      return "different";
     }
   }
-}
+  function numberOfCardsLeft() {
+    let numberOfCardsLeft = cards.length;
+    document.querySelectorAll(".icon").forEach((iconElement) => {
+      if (window.getComputedStyle(iconElement).display === "none") {
+        numberOfCardsLeft--;
+      }
+    });
+  }
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 }
-
-/* let $x = $('span.icon');
-  console.log($x.prop("content"));
-  $x.prop("content", "\\f257");
-  console.log($x.prop("content"));
-   */
-/* console.log($("#" + cardNumber));
-  console.log($("#" + cardNumber).prop("content"));
-  $("#" + cardNumber).prop("content", "\\f257");
-  console.log($("#" + cardNumber).prop("content"));
- */
-/*   $("#"+cardNumber).toggleClass("scissors");
-  sleep(1200).then(() => {
-    $(".icon.scissors").removeClass("scissors");
-  }); 
-}
-  
-    document.getElementById('demo').style = "Color: red";*/
 
 main();
 
@@ -169,6 +187,11 @@ function chronoStart() {
   chrono();
 }
 
+function chronoPause() {
+  start = new Date() - diff;
+  start = new Date(start);
+  chrono();
+}
 function chronoReset() {
   document.getElementById("chronotime").innerHTML = "0:00:00";
   start = new Date();

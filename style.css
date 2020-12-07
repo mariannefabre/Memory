@@ -71,11 +71,11 @@ body {
 }
 
 .buttonHolder {
-  width: 100%;
-  display: flex;
   height: 30vh;
   z-index: 3;
   position: relative;
+  margin: 0 auto;
+  display: flex;
 }
 .button {
   font-family: "Unica One", Cursive;
@@ -149,7 +149,7 @@ body {
   justify-content: center;
   margin: 0.5em;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.4s;
   border-radius: 10px;
 }
 
@@ -236,6 +236,8 @@ body {
 /* Icons on cards */
 
 span.icon {
+  width:100%;
+  height: 100%;
   transform: translateZ(0);
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -246,6 +248,10 @@ span.icon::before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content: "\f128";
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon.icon1::before {
@@ -254,18 +260,38 @@ span.icon::before {
 .icon.icon2::before {
   content: "\f1e2";
 }
-
 .icon.icon3::before {
   content: "\f083";
 }
-
 .icon.icon4::before {
   content: "\f810";
 }
-
 .icon.icon5::before {
   content: "\f1e3";
 }
 .icon.icon6::before {
   content: "\f57b";
+}
+
+/* Animation */
+
+.fadeOut { /* rename */
+  animation-name: removeCard;
+  animation-duration: 2000ms;
+  animation-fill-mode: forwards;
+}
+@keyframes removeCard {
+  0%{
+    opacity: 1;
+    transform: rotateY(90deg);
+  }
+  50%{
+    opacity: 0.5;
+    transform: rotateY(0deg);
+  }
+  100%{
+    display: none;
+    opacity: 0;
+    transform: rotateY(90deg);
+  }
 }
