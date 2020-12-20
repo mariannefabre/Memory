@@ -5,12 +5,24 @@ function main() {
 
   let playButton = document.getElementById("play-button");
   playButton.addEventListener("click", initiateGame, true);
+  let restartButton = document.getElementById("restart-button");
+  restartButton.addEventListener("click", initiateGame, true);
 
   function initiateGame() {
     document.getElementById("overlay").style.display = "none";
-    document.getElementById("play-button").style.display = "none";
-    document.getElementById("score").style.display = "flex";
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("score").style.visibility = "visible";
+    document.getElementById("row").style.display = "flex";
+    document.getElementById("restart-button").classList.remove("translate");
+    document.getElementById("score").classList.remove("endGame");
+
     chronoStart();
+    document.querySelectorAll(".icon").forEach((iconElement) => {
+      if (iconElement.parentElement.classList.contains("fadeOut")) {
+        iconElement.parentElement.classList.remove("fadeOut");
+        iconElement.className = "icon";
+      }
+    });
 
     const cardNumber = [
       "one",
@@ -58,7 +70,7 @@ function main() {
       const matchingCard = cards.find((card) => card[0] == iconElement.id);
       const icon = matchingCard[1];
       displayResult(iconElement.id, icon);
-
+      // $("#" + iconElement.id).parent().addClass("show");
       switch (icon) {
         case "\\f06d":
           $("#" + iconElement.id).addClass("icon1");
@@ -96,12 +108,17 @@ function main() {
           turnsCount++;
           document.getElementById("count").innerHTML = turnsCount;
           if (numberOfCardsLeft() == 0) {
-            chronoPause();
+            chronoStop();
+            let el = document.getElementById("score");
+            $(el).addClass("endGame");
+            let el2 = document.getElementById("restart-button");
+            $(el2).addClass("translate");
           }
         });
       } else if (compareCards() === "different") {
         changeCursor(chosenCard, "pointer");
         changeCursor(previousCard, "pointer");
+        // make it impossible to click on another card during this time:
         sleep(1000).then(() => {
           let lastClass = $("#" + chosenCard)
             .attr("class")
@@ -145,10 +162,11 @@ function main() {
   function numberOfCardsLeft() {
     let numberOfCardsLeft = cards.length;
     document.querySelectorAll(".icon").forEach((iconElement) => {
-      if (window.getComputedStyle(iconElement).display === "none") {
+      if (iconElement.parentElement.classList.contains("fadeOut")) {
         numberOfCardsLeft--;
       }
     });
+    return numberOfCardsLeft;
   }
 
   function sleep(ms) {
@@ -157,22 +175,21 @@ function main() {
 }
 
 main();
-
 // Timer
 
-var startTime = 0;
-var start = 0;
-var end = 0;
-var diff = 0;
-var timerID = 0;
+let startTime = 0;
+let start = 0;
+let end = 0;
+let diff = 0;
+let timerID = 0;
 
 function chrono() {
   end = new Date();
   diff = end - start;
   diff = new Date(diff);
-  var sec = diff.getSeconds();
-  var min = diff.getMinutes();
-  var hr = diff.getHours() - 1;
+  let sec = diff.getSeconds();
+  let min = diff.getMinutes();
+  let hr = diff.getHours() - 1;
   if (min < 10) {
     min = "0" + min;
   }
@@ -180,23 +197,17 @@ function chrono() {
     sec = "0" + sec;
   }
   document.getElementById("chronotime").innerHTML = hr + ":" + min + ":" + sec;
-  timerID = setTimeout("chrono()", 10);
+  timerID = setTimeout("chrono()", 1000);
 }
 function chronoStart() {
   start = new Date();
   chrono();
 }
-
-function chronoPause() {
-  start = new Date() - diff;
-  start = new Date(start);
-  chrono();
+function chronoStop() {
+  clearTimeout(timerID);
+  document.getElementById("row").style.display = "none";
 }
 function chronoReset() {
   document.getElementById("chronotime").innerHTML = "0:00:00";
   start = new Date();
-}
-
-function chronoStop() {
-  clearTimeout(timerID);
 }

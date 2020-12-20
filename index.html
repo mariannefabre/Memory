@@ -3,16 +3,12 @@
   <head>
     <title>Train your brain !</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <!--     <link
+    <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    /> -->
-    <script
-      src="https://kit.fontawesome.com/6d824d121f.js"
-      crossorigin="anonymous"
-    ></script>
+      type="text/css"
+      href="fontawesome-free-5.15.1-web/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Crimson+Text|Unica+One"
       rel="stylesheet"
@@ -23,10 +19,14 @@
   <body>
     <div id="overlay"></div>
     <div class="container">
-      <div class="wrapper">
-        <div class="buttonHolder" id="play-button">
-          <a class="button" href="#">Play</a>
-        </div>
+      <div class="intro" id="intro">
+        <h1>Memory Card Game</h1>
+        <h2>How to play?</h2>
+          <p> Find matching pairs in a 12 face-down cards deck. You can only flip two cards at a time.</p>
+      <div class="buttonHolder" id="play-button"> 
+        <a class="button" href="#">Play</a>
+      </div>
+    </div>
         <div class="scoreHolder" id="score">
           <div class="timer">
             <h2>Time spent</h2>
@@ -37,9 +37,11 @@
             <p id="count">0</p>
           </div>
         </div>
-      </div>
+        <div class="button" id="restart-button">
+          <span class="fas fa-redo restart"></span>
+        </div>
 
-      <div class="row">
+      <div class="row" id="row">
         <div class="card one">
           <span class="icon" aria-hidden="true" id="one"></span>
         </div>
