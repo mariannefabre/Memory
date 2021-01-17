@@ -15,7 +15,7 @@ function main() {
     document.getElementById("row").style.display = "flex";
     document.getElementById("restart-button").classList.remove("translate");
     document.getElementById("score").classList.remove("endGame");
-
+    document.getElementById("count").innerHTML = "0";
     chronoStart();
     document.querySelectorAll(".icon").forEach((iconElement) => {
       if (iconElement.parentElement.classList.contains("fadeOut")) {
@@ -119,7 +119,7 @@ function main() {
         changeCursor(chosenCard, "pointer");
         changeCursor(previousCard, "pointer");
         // make it impossible to click on another card during this time:
-        sleep(1000).then(() => {
+        sleep(500).then(() => {
           let lastClass = $("#" + chosenCard)
             .attr("class")
             .split(" ")
