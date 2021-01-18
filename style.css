@@ -14,7 +14,7 @@ body {
   justify-content: center;
   height: 100%;
   color: white;
-  background-color: #11161f;
+  background-color: #090d12;
 }
 
 #overlay {
@@ -242,17 +242,16 @@ span.icon::before {
   justify-content: center;
 }
 
-@media only screen and (min-width: 500px){
+@media only screen and (min-width: 500px) {
   span.icon::before {
     font-size: 2.5rem;
+  }
 }
-}
-@media only screen and (min-width: 1000px){
+@media only screen and (min-width: 1000px) {
   span.icon::before {
     font-size: 3rem;
+  }
 }
-}
-
 
 .icon.icon1::before {
   content: "\f06d";
